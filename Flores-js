@@ -1,0 +1,31 @@
+document.addEventListener('DOMContentLoaded', () => {
+    const btn = document.getElementById('surpriseBtn');
+    if (!btn) return;
+
+    function dispararLluvia(e) {
+        if (e) e.preventDefault();
+        const emojis = ['🌼', '🌻', '✨', '💛'];
+        const width = window.innerWidth;
+
+        for (let i = 0; i < 40; i++) {
+            const petal = document.createElement('div');
+            petal.classList.add('petal');
+            petal.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
+            petal.style.position = 'absolute';
+            petal.style.top = '-50px';
+            petal.style.left = Math.random() * width + 'px';
+            petal.style.animation = 'fall linear forwards';
+            petal.style.animationDuration = (Math.random() * 2 + 1.5) + 's';
+            petal.style.fontSize = (Math.random() * 1.2 + 1) + 'rem';
+            petal.style.zIndex = '1';
+            petal.style.userSelect = 'none';
+            petal.style.pointerEvents = 'none';
+            
+            document.body.appendChild(petal);
+            setTimeout(() => { petal.remove(); }, 4000);
+        }
+    }
+
+    btn.addEventListener('click', dispararLluvia);
+    btn.addEventListener('touchend', dispararLluvia);
+});
